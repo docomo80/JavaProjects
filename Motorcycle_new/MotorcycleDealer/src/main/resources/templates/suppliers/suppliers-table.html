@@ -1,0 +1,30 @@
+<div class="container">
+    <a sec:authorize="hasRole('ADMIN')" href="/suppliers/add" class="btn btn-info m-1"> Add Supplier</a>
+
+    <table class="table table-condensed table-hover">
+        <thead>
+        <tr>
+
+            <th>Id</th>
+            <th>Name</th>
+            <th>Number of parts</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="form-control-feedback" th:each="supplier : ${suppliers}">
+            <th scope="row" th:text="${supplier.id}"></th>
+            <td th:text="${supplier.name}"></td>
+            <td th:text="${#lists.size(supplier.parts)}"></td>
+            <th:block sec:authorize="isAuthenticated()" >
+                <td>
+                    <a th:href="@{/suppliers/delete/{id}(id=${supplier.id})}">Delete</a>
+                </td>
+                <td>
+                    <a th:href="@{/suppliers/edit/{id}(id=${supplier.id})}">Edit</a>
+                </td>
+            </th:block>
+        </tr>
+        </tbody>
+    </table>
+</div>
+

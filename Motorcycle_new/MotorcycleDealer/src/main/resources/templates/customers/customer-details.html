@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head}">
+</head>
+<body>
+
+<header th:replace="~{fragments/header}"></header>
+<div class="container">
+    <div class="card-group">
+        <div id="customerList" class="card" th:object="${customer}">
+            <div class="card-block">
+                <h4 class="card-title" th:text="*{name}"></h4>
+                <p class="card-text" th:text="|Bought motorcycles: *{#sets.size(sales)}|"></p>
+                <p class="card-text" th:text="|Total spent money:  *{#numbers.formatDecimal(totalSum,0,2)}|"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:replace="~{fragments/footer}"></script>

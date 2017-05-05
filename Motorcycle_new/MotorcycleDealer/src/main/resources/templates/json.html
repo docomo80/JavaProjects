@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>To Do List</title>
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css"
+          th:href="@{bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css"
+    //th:href="@{css/home.css}"/>
+</head>
+<body>
+
+<header th:replace="~{fragments/header}"></header>
+
+<main>
+
+    <div class="container-fluid">
+        <div class="card-group">
+            <div id="customerList" class="card">
+                <div class="card-block">
+                    <h4 class="card-title"></h4>
+                    <p class="card-text"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+<script th:src="@{jquery/jquery.min.js}"></script>
+<script th:src="@{bootstrap/js/bootstrap.min.js}"></script>
+<script type="text/javascript">
+
+    //Execute when page is open and HTML is ready
+
+    $(function () {
+        loadJsonCustomers()
+    });
+
+    //get Json Data
+    function loadJsonCustomers() {
+        $.ajax({
+            type: 'GET',
+            url: '/customers/1',
+            data: 'json',
+            success: function (customer) {
+                loadCustomer(customer)
+            }
+        });
+    }
+
+    function loadCustomer(customer) {
+
+        var customerName = customer.name;
+        var customerId = customer.id;
+        var customerBirthDate = customer.sales;
+        var customerIsYongDriver = customer.youngDriver;
+        var sum = customer.totalSum;
+        $('#customerList')
+            .addClass('card')
+            .append($('<p></p>')
+                .addClass('card-title')
+                .text('Name: ' + customerName))
+            .append($('<p></p>')
+                .addClass('card-title')
+                .text('Young driver: ' + customerIsYongDriver))
+            .append($('<p></p>')
+                .addClass('card-title')
+                .text('sum: ' + sum))
+    }
+</script>
+</html>

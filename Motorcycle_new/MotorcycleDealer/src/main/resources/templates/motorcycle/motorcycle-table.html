@@ -1,0 +1,28 @@
+<div class="container">
+    <a sec:authorize="isAuthenticated()" href="/motorcycle/add" class="btn btn-warning m-1"> Add Motorcycles</a>
+    <div class="row" style="padding: 10px">
+
+    </div>
+
+    <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+
+            <th>Make</th>
+            <th>Model</th>
+            <th>Travelled distance</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="motorcycle : ${motorcycles}">
+            <th scope="row" th:text="${motorcycle.make}"></th>
+            <td th:text="${motorcycle.model}"></td>
+            <td th:text="${#numbers.formatDecimal(motorcycle.travelledDistance,0,2)}"></td>
+            <td>
+                <a th:href="@{/motorcycle/{id}/parts(id=${motorcycle.id})}">Details</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+

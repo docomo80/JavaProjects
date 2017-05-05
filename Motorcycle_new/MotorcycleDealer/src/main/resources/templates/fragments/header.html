@@ -1,0 +1,65 @@
+<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+
+<header>
+    <nav class="navbar navbar-inverse bg-inverse">
+        <div class="container">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="/">Motorcycle Dealer</a>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/customers/all}">Customers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/motorcycle/all}">Motorcycle</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="hasRole('ADMIN') or hasRole('USER')">
+                        <a class="nav-link" th:href="@{/suppliers}">Suppliers</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="hasRole('ADMIN') or hasRole('USER')">
+                        <a class="nav-link" th:href="@{/parts/all}">Parts</a>
+                    </li>
+
+                    <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                           aria-haspopup="true" aria-expanded="false">Sales</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" th:href="@{/sales/all}">All</a>
+                            <a class="dropdown-item" th:href="@{/sales/add}">Add</a>
+                        </div>
+                    </li>
+
+                </ul>
+                <ul class="navbar-nav">
+                    <th:block th:switch="${session.user}">
+                        <th:block th:case="null">
+                            <li class="nav-item" sec:authorize="isAnonymous()">
+                                <a class="nav-link" href="/user/login">Sign in</a>
+                            </li>
+                            <li class="nav-item" sec:authorize="isAnonymous()">
+                                <a class="nav-link" href="/user/register">Sign up</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/logs/all">Logs</a>
+                            </li>
+                            <li class="nav-item" sec:authorize="isAuthenticated()">
+                                <a class="nav-link" href="/user/logout">Logout </a>
+                            </li>
+                        </th:block>
+                        <!--<th:block th:case="*">-->
+                        <!--</th:block>-->
+                    </th:block>
+
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+
+</header>
+

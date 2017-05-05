@@ -1,0 +1,40 @@
+<br/>
+<link href="/css/login.css" rel="stylesheet" type="text/css"/>
+
+<main>
+    <div class="container">
+        <div th:replace=~{errors}></div>
+        <div class="row">
+            <div class="col-12 col-md-offset-4">
+                <h1 class="text-center login-title">Sign in to continue</h1>
+                <div class="account-wall">
+                    <img class="profile-img"
+                         src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
+                         alt="">
+                    <form class="form-signin" method="post" th:object="${user}">
+                        <input type="text" class="form-control" placeholder="Username" th:field="*{username}" required
+                               autofocus>
+                        <input type="password" class="form-control" placeholder="Password" required
+                               th:field="*{password}">
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">
+                            Sign in
+                        </button>
+                        <label class="checkbox pull-left">
+                            <input type="checkbox" value="rememberMe">
+                            Remember me
+                        </label>
+                        <br/>
+                        <!--<a href="#" class="pull-right need-help">Need help? </a><span class="clearfix"></span>-->
+                        <form action="/connect/facebook" method="post">
+                            <input type="hidden" name="scope"
+                                   value="public_profile, email, publish_actions, publish_pages, manage_pages"/>
+                            <input class="btn btn-primary" type="submit" value="Facebook"/>
+                        </form>
+                    </form>
+
+                </div>
+                <a href="/user/register" class="text-center new-account">Create an account </a>
+            </div>
+        </div>
+    </div>
+</main>
